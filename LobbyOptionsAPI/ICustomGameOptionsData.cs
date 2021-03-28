@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using HarmonyLib;
@@ -95,7 +94,7 @@ namespace LobbyOptionsAPI
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSyncSettings))]
         public static class PlayerControl_RpcSyncSettings
         {
-            public static void Postfix(GameOptionsData IOFBPLNIJIC)
+            public static void Postfix(PAMOPBEDCNI OMFKMPLOPPM)
             {
                 if (PlayerControl.AllPlayerControls.Count > 1)
                 {
@@ -114,19 +113,19 @@ namespace LobbyOptionsAPI
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.HandleRpc))]
         public static class PlayerControl_HandleRpc
         {
-            public static void Postfix(byte HKHMBLJFLMC, MessageReader ALMCIJKELCP)
+            public static void Postfix(byte ACCJCEHMKLN, MessageReader HFPCBBHJIPJ)
             {
                 foreach (var opt in lobbyOptions)
                 {
-                    if (HKHMBLJFLMC == opt.rpcId)
+                    if (ACCJCEHMKLN == opt.rpcId)
                     {
-                        opt.FromBytes(ALMCIJKELCP.ReadBytesAndSize());
+                        opt.FromBytes(HFPCBBHJIPJ.ReadBytesAndSize());
                     }
                 }
             }
         }
 
-        [HarmonyPatch(typeof(GameOptionsData), nameof(GameOptionsData.Method_68))] //SetRecommendations
+        [HarmonyPatch(typeof(PAMOPBEDCNI), nameof(PAMOPBEDCNI.KENCPHDPCOG))] //SetRecommendations
         public static class GameOptionsData_SetRecommendations
         {
             public static void Postfix()
@@ -138,12 +137,12 @@ namespace LobbyOptionsAPI
             }
         }
 
-        [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.Method_47))] //LoadGameOptions
+        [HarmonyPatch(typeof(BNAOOLKPIBG), nameof(BNAOOLKPIBG.DNICLBENBHI))] //LoadGameOptions
         public static class SaveManager_LoadGameOptions
         {
-            public static void Postfix(string HAGKNHFOMIJ)
+            public static void Postfix(string KBKMELDFFCK)
             {
-                if (HAGKNHFOMIJ == "gameHostOptions")
+                if (KBKMELDFFCK == "gameHostOptions")
                 {
                     foreach (var opt in lobbyOptions)
                     {
@@ -153,12 +152,12 @@ namespace LobbyOptionsAPI
             }
         }
 
-        [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.SaveGameOptions))] //SaveGameOptions
+        [HarmonyPatch(typeof(BNAOOLKPIBG), nameof(BNAOOLKPIBG.AKIIGONMLFE))] //SaveGameOptions
         public static class SaveManager_SaveGameOptions
         {
-            public static void Postfix(string HAGKNHFOMIJ)
+            public static void Postfix(string KBKMELDFFCK)
             {
-                if (HAGKNHFOMIJ == "gameHostOptions")
+                if (KBKMELDFFCK == "gameHostOptions")
                 {
                     foreach (var opt in lobbyOptions)
                     {
@@ -168,7 +167,7 @@ namespace LobbyOptionsAPI
             }
         }
 
-        [HarmonyPatch(typeof(GameOptionsData), nameof(GameOptionsData.Method_24))]
+        [HarmonyPatch(typeof(PAMOPBEDCNI), nameof(PAMOPBEDCNI.NHJLMAAHKJF))]
         static class GameOptionsData_ToHudString
         {
             [HarmonyPriority(Priority.Normal - 1)]
@@ -182,7 +181,7 @@ namespace LobbyOptionsAPI
 
                 __result = builder.ToString();
 
-                DestroyableSingleton<HudManager>.Instance.GameSettings.scale = 0.5f;
+                DestroyableSingleton<HudManager>.NHNKGLAPHHJ.GameSettings.scale = 0.5f;
             }
         }
     }

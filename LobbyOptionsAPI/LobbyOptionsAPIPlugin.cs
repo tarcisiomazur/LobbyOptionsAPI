@@ -1,12 +1,9 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using HarmonyLib;
-
 namespace LobbyOptionsAPI
 {
-    [BepInPlugin(Id)]
-    [BepInProcess("Among Us.exe")]
+    [BepInPlugin(Id,"","")]
     public class LobbyOptionsAPI : BasePlugin
     {
         public const string Id = "com.herysia.LobbyOptionsAPI";

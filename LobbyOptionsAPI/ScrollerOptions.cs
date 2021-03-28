@@ -18,7 +18,7 @@ namespace LobbyOptionsAPI
         {
             var obj = new CustomNumberOption(defaultValue, titleNum++, title, min, max, step);
             options.Add(obj);
-            obj.format = "{0:0}" + extension;
+            obj.format = "0" + extension;
             return obj;
         }
 
@@ -27,7 +27,7 @@ namespace LobbyOptionsAPI
         {
             var obj = new CustomNumberOption(defaultValue, titleNum++, title, min, max, step);
             options.Add(obj);
-            obj.format = "{0:0.0#}" + extension;
+            obj.format = "0.0" + extension;
             return obj;
         }
 
@@ -42,11 +42,11 @@ namespace LobbyOptionsAPI
             new Type[] {typeof(StringNames), typeof(Il2CppReferenceArray<Il2CppSystem.Object>)})]
         static class TranslationController_GetString
         {
-            public static bool Prefix(StringNames HKOIECMDOKL, ref string __result)
+            public static bool Prefix(StringNames DKEHCKOHMOH, ref string __result)
             {
                 foreach (var opt in options)
                 {
-                    if (opt.optionTitleName == HKOIECMDOKL)
+                    if (opt.optionTitleName == DKEHCKOHMOH)
                     {
                         __result = opt.optionTitle;
                         return false;
@@ -68,7 +68,7 @@ namespace LobbyOptionsAPI
 
             public static void OnValueChanged(OptionBehaviour option)
             {
-                if (!AmongUsClient.Instance || !AmongUsClient.Instance.AmHost) return;
+                if (AmongUsClient.Instance == null || !AmongUsClient.Instance.LKBIPDDGGIF) return;
                 foreach (var opt in options)
                 {
                     if (opt.optionTitleName == option.Title)
@@ -78,10 +78,10 @@ namespace LobbyOptionsAPI
                     }
                 }
 
-                if (PlayerControl.GameOptions.isDefaults)
+                if (PlayerControl.GameOptions.NMPPODEHDFL)
                 {
-                    PlayerControl.GameOptions.isDefaults = false;
-                    UnityEngine.Object.FindObjectOfType<GameOptionsMenu>().Method_16(); //RefreshChildren
+                    PlayerControl.GameOptions.NMPPODEHDFL = false;
+                    UnityEngine.Object.FindObjectOfType<GameOptionsMenu>().ValueChanged(option); //RefreshChildren
                 }
 
                 var local = PlayerControl.LocalPlayer;
@@ -158,7 +158,7 @@ namespace LobbyOptionsAPI
         public float min;
         public float max;
         public float step;
-        public string format = "{0:0}";
+        public string format = "0.0";
 
         public CustomNumberOption(float defaultValue, StringNames optionTitleName, string optionTitle, float min,
             float max, float step) : base(optionTitleName, optionTitle)
